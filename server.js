@@ -44,9 +44,7 @@ app.delete('/api/notes/:id', (req, res) => {
   );
   res.json(notes)
 
-})
-
-
+});
 
 // // HTML Routes
 app.get('/', (req, res) => {
