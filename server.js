@@ -12,7 +12,7 @@ const app = express();
 // // Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
+app.use(express.static('Develop/public'));
 
 
 // //Routes for API
@@ -55,10 +55,10 @@ app.get('/notes', (req, res) => {
   res.sendFile(path.join(__dirname, './Develop/public/notes.html'));
 });
 
-app.get('/assets/*', (req, res) => {
-  console.log(req.path);
-  res.sendFile(path.join(__dirname, `./Develop/public/${req.path}`));
-});
+// app.get('/assets/*', (req, res) => {
+//   console.log(req.path);
+//   res.sendFile(path.join(__dirname, `./Develop/public/${req.path}`));
+// });
 
 app.listen(PORT, () => {
   console.log(`API server now on port ${PORT}!`);
