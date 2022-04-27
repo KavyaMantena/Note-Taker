@@ -2,7 +2,7 @@
 const express = require('express');
 const fs = require('fs')
 const path = require('path');
-let notes = require('./develop/db/db.json');
+let notes = require('./Develop/db/db.json');
 
 
 const PORT = process.env.PORT || 3001;
@@ -25,9 +25,9 @@ app.get('/api/notes', (req, res) => {
 app.post('/api/notes', (req, res) => {
   req.body.id = notes.length;
   notes.push(req.body)
-  console.log(path.join(__dirname, '../../develop/db/db.json'));
+  console.log(path.join(__dirname, '../../Develop/db/db.json'));
   fs.writeFileSync(
-    path.join(__dirname, './develop/db/db.json'),
+    path.join(__dirname, './Develop/db/db.json'),
     JSON.stringify(notes, null, 2)
   );
   res.json(req.body);
@@ -39,7 +39,7 @@ app.delete('/api/notes/:id', (req, res) => {
   console.log(req.params);
   notes = notes.filter(note => note.id !== Number(req.params.id))
   fs.writeFileSync(
-    path.join(__dirname, './develop/db/db.json'),
+    path.join(__dirname, './Develop/db/db.json'),
     JSON.stringify(notes)
   );
   res.json(notes)
@@ -48,16 +48,16 @@ app.delete('/api/notes/:id', (req, res) => {
 
 // // HTML Routes
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, './develop/public/index.html'));
+  res.sendFile(path.join(__dirname, './Develop/public/index.html'));
 });
 
 app.get('/notes', (req, res) => {
-  res.sendFile(path.join(__dirname, './develop/public/notes.html'));
+  res.sendFile(path.join(__dirname, './Develop/public/notes.html'));
 });
 
 app.get('/assets/*', (req, res) => {
   console.log(req.path);
-  res.sendFile(path.join(__dirname, `./develop/public/${req.path}`));
+  res.sendFile(path.join(__dirname, `./Develop/public/${req.path}`));
 });
 
 app.listen(PORT, () => {
